@@ -9,16 +9,20 @@ import { RootState } from "../../../redux/store/store";
 {
   /* INTERFACE */
 }
-interface UserInfo {
-  emp_id: number;
+interface dataFormat {
+  emp_id: string;
   fname: string;
   lname: string;
   mname: string;
-  username: string | number;
+  username: string;
   position_sh_name: string | number;
   section_name: string | number;
   dept_name: string | number;
-  email: string | number;
+  email: string;
+  status_code: string | number;
+  position_id: number;
+  dept_id: number;
+  section_id: number;
 }
 
 export default function EditProfile() {
@@ -36,7 +40,7 @@ export default function EditProfile() {
   {
     /* Root canal */
   }
-  const userData: UserInfo[] = useSelector(
+  const userData: dataFormat[] = useSelector(
     (state: RootState) => state.userReducer.users
   );
 
@@ -50,6 +54,8 @@ export default function EditProfile() {
   }
   console.log(filteredUserData);
   console.log(userId);
+
+
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -106,7 +112,7 @@ export default function EditProfile() {
             </div>
             <input
               type="text"
-              placeholder={user.mname}      
+              placeholder={user.mname}
               className="input input-bordered w-full max-w-xs placeholder-[#53d2fa] bg-[#3c4656]"
             />
           </div>
@@ -172,9 +178,45 @@ export default function EditProfile() {
           </div>
           <div className="buttonContainer">
             <Link to="/userlist">
-          <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg m-2 btn-outline bg-[#1b2634] text-[#85d9ef] hover:bg-[#85d9ef] hover:text-[#1b2634]">Return</button>
-          </Link>
-          <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg m-2 btn-outline bg-[#1b2634] text-[#85d9ef] hover:bg-[#85d9ef] hover:text-[#1b2634]">Update</button>
+              <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg m-2 btn-outline bg-[#1b2634] text-[#85d9ef] hover:bg-[#85d9ef] hover:text-[#1b2634]">
+                BACK
+              </button>
+            </Link>
+
+            <button
+              className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg m-2 btn-outline bg-[#1b2634] text-[#85d9ef] hover:bg-[#85d9ef] hover:text-[#1b2634]"
+              onClick={() => {
+                const modal = document.getElementById(
+                  "updateModal"
+                ) as HTMLDialogElement | null;
+                if (modal && modal instanceof HTMLDialogElement) {
+                  modal.showModal();
+                }
+              }}
+            >
+              UPDATE
+            </button>
+            <dialog
+              id="updateModal"
+              className="modal modal-bottom sm:modal-middle"
+            >
+              <div className="modal-box bg-[#1b2634]">
+                <h3 className="font-bold text-lg">Updating Profile Alert!</h3>
+                <p className="py-4">
+                  Are you sure you want to continue your update?
+                </p>
+                <div className="modal-action">
+                  <form method="dialog">
+                    <button className="btn m-3 btn-outline bg-[#1b2634] text-[#85d9ef] hover:bg-[#85d9ef] hover:text-[#1b2634]">
+                      Cancel
+                    </button>
+                    <button className="btn m-3 btn-outline bg-[#1b2634] text-[#85d9ef] hover:bg-[#85d9ef] hover:text-[#1b2634]">
+                      Proceed
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </dialog>
           </div>
         </div>
       ))}

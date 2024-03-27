@@ -21,7 +21,7 @@ interface userFormat {
   section_name: string | number;
   dept_name: string | number;
   reg_date: string | number;
-  [key: string]: string | number; // Index signature
+  [key: string]: string | number; 
 }
 
 
@@ -145,7 +145,7 @@ export default function UserListData() {
                 <td>{user.reg_date}</td>
                 <td className="flex items-center space-x-2">
                   <Link
-                    to={`/editprofile/${user.username}`}
+                    to={`/test/${user.username}`}
                     state={{ state: user.emp_id }}
                   >
                     <RiEditBoxLine className="h-5 w-5" />

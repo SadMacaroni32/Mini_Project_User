@@ -43,9 +43,6 @@ export const userSlice = createSlice({
 		getUsersFetch: (state) => {
 			state.isLoading = true;
 		},
-		getUserInfo: (state) => {
-			state.isLoading =true;
-		},
 		getUsersSuccess: (state, action) => {
 			state.users = action.payload;
 			state.isLoading = false;
